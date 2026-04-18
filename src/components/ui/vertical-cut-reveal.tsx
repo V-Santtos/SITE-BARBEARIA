@@ -3,19 +3,18 @@
 import {
   forwardRef,
   useCallback,
-  useEffect,
   useImperativeHandle,
   useMemo,
   useRef,
   useState,
 } from "react"
-import { DynamicAnimationOptions, motion } from "framer-motion"
+import { Transition, motion } from "framer-motion"
 import { cn } from "@/lib/utils"
 
 interface TextProps {
   children: React.ReactNode
   reverse?: boolean
-  transition?: DynamicAnimationOptions
+  transition?: Transition
   splitBy?: "words" | "characters" | "lines" | string
   staggerDuration?: number
   staggerFrom?: "first" | "last" | "center" | "random" | number
@@ -64,7 +63,7 @@ const VerticalCutReveal = forwardRef<VerticalCutRevealRef, TextProps>(
   ) => {
     const containerRef = useRef<HTMLSpanElement>(null)
     const text = typeof children === "string" ? children : children?.toString() || ""
-    const [isAnimating, setIsAnimating] = useState(false)
+    const [isAnimating, setIsAnimating] = useState(autoStart)
 
     const splitIntoCharacters = (text: string): string[] => {
       if (typeof Intl !== "undefined" && "Segmenter" in Intl) {
@@ -127,11 +126,6 @@ const VerticalCutReveal = forwardRef<VerticalCutRevealRef, TextProps>(
       reset: () => setIsAnimating(false),
     }))
 
-    useEffect(() => {
-      if (autoStart) {
-        startAnimation()
-      }
-    }, [autoStart, startAnimation])
 
     const variants = {
       hidden: { y: reverse ? "-100%" : "100%" },
