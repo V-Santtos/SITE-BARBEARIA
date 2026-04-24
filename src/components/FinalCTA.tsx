@@ -23,7 +23,7 @@ export default function FinalCTA() {
           observer.disconnect();
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.1 },
     );
     observer.observe(el);
     return () => observer.disconnect();
@@ -104,7 +104,12 @@ export default function FinalCTA() {
                 staggerDuration={0.1}
                 staggerFrom="first"
                 containerClassName="justify-center"
-                transition={{ type: "spring", stiffness: 220, damping: 32, delay: 0.05 }}
+                transition={{
+                  type: "spring",
+                  stiffness: 220,
+                  damping: 32,
+                  delay: 0.05,
+                }}
               >
                 Organize seus agendamentos.
               </VerticalCutReveal>
@@ -113,7 +118,12 @@ export default function FinalCTA() {
                 staggerDuration={0.1}
                 staggerFrom="first"
                 containerClassName="justify-center"
-                transition={{ type: "spring", stiffness: 220, damping: 32, delay: 0.22 }}
+                transition={{
+                  type: "spring",
+                  stiffness: 220,
+                  damping: 32,
+                  delay: 0.22,
+                }}
               >
                 Sem depender de ninguém.
               </VerticalCutReveal>

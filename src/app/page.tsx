@@ -19,15 +19,18 @@ export default function Home() {
             className="hero-blur-seam"
             style={{
               position: "absolute",
-              top: "100svh",
+              // top: "100svh",
               left: 0,
               right: 0,
               height: 160,
+              width: "auto",
               transform: "translateY(-50%)",
               backdropFilter: "blur(24px)",
               WebkitBackdropFilter: "blur(24px)",
-              maskImage: "linear-gradient(to bottom, transparent, black 35%, black 65%, transparent)",
-              WebkitMaskImage: "linear-gradient(to bottom, transparent, black 35%, black 65%, transparent)",
+              maskImage:
+                "linear-gradient(to bottom, transparent, black 35%, black 65%, transparent)",
+              WebkitMaskImage:
+                "linear-gradient(to bottom, transparent, black 35%, black 65%, transparent)",
               zIndex: 40,
               pointerEvents: "none",
             }}

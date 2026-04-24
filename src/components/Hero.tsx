@@ -30,10 +30,10 @@ export default function Hero() {
 
   return (
     <section
-      className="relative overflow-hidden bg-grid items-start lg:items-center pt-32 lg:pt-[120px]"
+      className="relative bg-grid items-start lg:items-center pt-16 lg:pt-[120px] min-h-fit lg:min-h-svh overflow-visible lg:overflow-hidden"
       style={{
         background: "var(--background)",
-        minHeight: "100svh",
+
         display: "flex",
         zIndex: 1,
       }}
@@ -52,7 +52,8 @@ export default function Hero() {
         style={{
           zIndex: 0,
           maskImage: "linear-gradient(to bottom, black 85%, transparent 100%)",
-          WebkitMaskImage: "linear-gradient(to bottom, black 85%, transparent 100%)",
+          WebkitMaskImage:
+            "linear-gradient(to bottom, black 85%, transparent 100%)",
         }}
       />
 
@@ -74,18 +75,20 @@ export default function Hero() {
 
       {/* Scrim — dissolve o Hero no fundo da próxima seção */}
       <div
-        className="hero-scrim absolute bottom-0 left-0 right-0 pointer-events-none"
+        className="hero-scrim absolute bottom-0 left-0 right-0 pointer-events-none h-16 lg:h-[180px]"
         style={{
-          height: 180,
+          // height: 180,
           background: "linear-gradient(to bottom, transparent, #1E1E1E)",
           zIndex: 3,
         }}
       />
 
       {/* Conteúdo principal */}
-      <div className="relative max-w-6xl mx-auto px-6 py-6 lg:py-24 w-full" style={{ zIndex: 10 }}>
+      <div
+        className="relative max-w-6xl mx-auto px-6 py-6 lg:py-24 w-full"
+        style={{ zIndex: 10 }}
+      >
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-
           {/* ── Left: Text content ── */}
           <div className="text-center lg:text-left">
             {/* Headline */}
@@ -104,9 +107,7 @@ export default function Hero() {
               <span className="block lg:inline">Seu atendimento </span>
               <span className="text-gradient block lg:inline">no piloto</span>
               <br className="hidden lg:block" />
-              <span style={{ color: "var(--foreground)" }}>
-                automático.
-              </span>
+              <span style={{ color: "var(--foreground)" }}>automático.</span>
             </h1>
 
             {/* Subheadline */}
@@ -141,19 +142,49 @@ export default function Hero() {
                   fontSize: 15,
                   padding: "14px 32px",
                   letterSpacing: "0.01em",
-                  boxShadow: "0 4px 28px rgba(249,115,22,0.45), 0 0 0 1px rgba(249,115,22,0.2)",
+                  boxShadow:
+                    "0 4px 28px rgba(249,115,22,0.45), 0 0 0 1px rgba(249,115,22,0.2)",
                 }}
                 onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLElement).style.backgroundColor = "#EA6C0A";
-                  (e.currentTarget as HTMLElement).style.boxShadow = "0 8px 36px rgba(249,115,22,0.60), 0 0 0 1px rgba(249,115,22,0.3)";
+                  (e.currentTarget as HTMLElement).style.backgroundColor =
+                    "#EA6C0A";
+                  (e.currentTarget as HTMLElement).style.boxShadow =
+                    "0 8px 36px rgba(249,115,22,0.60), 0 0 0 1px rgba(249,115,22,0.3)";
                 }}
                 onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLElement).style.backgroundColor = "#F97316";
-                  (e.currentTarget as HTMLElement).style.boxShadow = "0 4px 28px rgba(249,115,22,0.45), 0 0 0 1px rgba(249,115,22,0.2)";
+                  (e.currentTarget as HTMLElement).style.backgroundColor =
+                    "#F97316";
+                  (e.currentTarget as HTMLElement).style.boxShadow =
+                    "0 4px 28px rgba(249,115,22,0.45), 0 0 0 1px rgba(249,115,22,0.2)";
                 }}
               >
                 Ver demonstração
               </a>
+            </div>
+            {/* ── Mockup mobile — absoluto, fora do fluxo do documento ── */}
+            {/* zIndex 2: abaixo do scrim (3) para o fade funcionar, acima do bg (1) */}
+            <div
+              className="flex lg:hidden bottom-0 overflow-hidden pointer-events-none select-none"
+              style={{
+                transform: "translateX(-30%)",
+                width: "150vw",
+                height: "auto",
+
+                zIndex: 2,
+              }}
+            >
+              <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                style={{ width: "100%", display: "block" }}
+              >
+                <source
+                  src="/assets/Conversor WEBM - FreeConvert.com.webm"
+                  type="video/webm"
+                />
+              </video>
             </div>
 
             {/* Social proof strip — desktop only */}
@@ -173,7 +204,11 @@ export default function Hero() {
                   <div
                     key={i}
                     className="transition-transform duration-200 ease-out hover:-translate-y-2 hover:z-10"
-                    style={{ marginLeft: i === 0 ? 0 : -10, position: "relative", zIndex: i }}
+                    style={{
+                      marginLeft: i === 0 ? 0 : -10,
+                      position: "relative",
+                      zIndex: i,
+                    }}
                   >
                     <Image
                       src={`https://i.pravatar.cc/64?img=${seed}`}
@@ -220,50 +255,35 @@ export default function Hero() {
                   fontFamily: "var(--font-noto)",
                 }}
               >
-                Mais de{" "}
-                <strong style={{ color: "#fff" }}>
-                  50 barbearias
-                </strong>{" "}
+                Mais de <strong style={{ color: "#fff" }}>50 barbearias</strong>{" "}
                 já usam o sistema
               </p>
             </div>
           </div>
 
           {/* ── Right: Demo video — desktop only ── */}
-          <div className="hidden lg:flex justify-center lg:justify-end" style={{ overflow: "visible" }}>
+          <div
+            className="hidden lg:flex justify-center lg:justify-end"
+            style={{ overflow: "visible" }}
+          >
             <video
               autoPlay
               loop
               muted
               playsInline
-              style={{ width: "100%", transform: "scale(2.0)", transformOrigin: "center center" }}
+              style={{
+                width: "100%",
+                transform: "scale(2.0)",
+                transformOrigin: "center center",
+              }}
             >
-              <source src="/assets/Conversor WEBM - FreeConvert.com.webm" type="video/webm" />
+              <source
+                src="/assets/Conversor WEBM - FreeConvert.com.webm"
+                type="video/webm"
+              />
             </video>
           </div>
         </div>
-      </div>
-
-      {/* ── Mockup mobile — absoluto, fora do fluxo do documento ── */}
-      {/* zIndex 2: abaixo do scrim (3) para o fade funcionar, acima do bg (1) */}
-      <div
-        className="block lg:hidden absolute left-1/2 bottom-0 overflow-hidden pointer-events-none select-none"
-        style={{
-          transform: "translateX(-50%)",
-          width: "min(300px, 78vw)",
-          height: "clamp(280px, 72vw, 380px)",
-          zIndex: 2,
-        }}
-      >
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          style={{ width: "100%", display: "block" }}
-        >
-          <source src="/assets/Conversor WEBM - FreeConvert.com.webm" type="video/webm" />
-        </video>
       </div>
     </section>
   );

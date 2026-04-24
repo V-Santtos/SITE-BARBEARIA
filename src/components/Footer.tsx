@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 const WA_LINK =
   "https://wa.me/5500000000000?text=Ol%C3%A1!%20Quero%20saber%20mais%20sobre%20o%20BarberIO.";
@@ -9,6 +10,15 @@ const WA_LINK =
 const ORANGE = "#F97316";
 
 export default function Footer() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
+
   return (
     <footer
       style={{
@@ -16,7 +26,6 @@ export default function Footer() {
         borderTop: "1px solid rgba(255,255,255,0.07)",
       }}
     >
-      {/* Main footer */}
       <div
         style={{
           maxWidth: 1100,
@@ -24,125 +33,323 @@ export default function Footer() {
           padding: "64px 24px",
         }}
       >
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "2fr 1fr 1fr",
-            gap: 48,
-          }}
-        >
-          {/* Brand column */}
-          <div>
-            <Link
-              href="/"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 8,
-                marginBottom: 16,
-                textDecoration: "none",
-              }}
-            >
-              <Image
-                src="/assets/LOGO1.png"
-                alt="Logo"
-                width={28}
-                height={28}
-                style={{ objectFit: "contain" }}
-              />
-              <span
+        {isMobile ? (
+          // ── MOBILE ──
+          <div style={{ display: "flex", flexDirection: "column", gap: 32 }}>
+            {/* Brand */}
+            <div>
+              <Link
+                href="/"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 8,
+                  marginBottom: 16,
+                  textDecoration: "none",
+                }}
+              >
+                <Image
+                  src="/assets/LOGO1.png"
+                  alt="Logo"
+                  width={28}
+                  height={28}
+                  style={{ objectFit: "contain" }}
+                />
+                <span
+                  style={{
+                    fontFamily: "var(--font-jost)",
+                    fontSize: 16,
+                    fontWeight: 700,
+                    letterSpacing: "0.08em",
+                    color: "rgba(255,255,255,0.85)",
+                  }}
+                >
+                  automatiza
+                </span>
+                <span
+                  style={{
+                    fontFamily: "var(--font-jost)",
+                    fontSize: 16,
+                    fontWeight: 700,
+                    letterSpacing: "0.08em",
+                    color: ORANGE,
+                  }}
+                >
+                  .ia
+                </span>
+              </Link>
+              <p
+                style={{
+                  fontSize: 14,
+                  color: "rgba(255,255,255,0.4)",
+                  fontFamily: "var(--font-jost)",
+                  lineHeight: 1.7,
+                  marginBottom: 24,
+                }}
+              >
+                Sistema de agendamento automático para barbearias. Organizado,
+                profissional e sem depender de mensagens manuais.
+              </p>
+            </div>
+
+            {/* Navegação */}
+            <div>
+              <p
                 style={{
                   fontFamily: "var(--font-jost)",
-                  fontSize: 16,
+                  fontSize: 11,
                   fontWeight: 700,
-                  letterSpacing: "0.08em",
+                  letterSpacing: "0.15em",
                   color: "rgba(255,255,255,0.85)",
+                  textTransform: "uppercase",
+                  marginBottom: 16,
                 }}
               >
-                automatiza
-              </span>
-              <span
+                Navegação
+              </p>
+              <div
+                style={{ display: "flex", flexDirection: "column", gap: 12 }}
+              >
+                {[
+                  { label: "Funcionalidades", href: "#funcionalidades" },
+                  { label: "Como funciona", href: "#demo" },
+                  { label: "Benefícios", href: "#funcionalidades" },
+                  { label: "Planos", href: "#planos" },
+                  { label: "FAQ", href: "#faq" },
+                ].map(({ label, href }) => (
+                  <Link
+                    key={href + label}
+                    href={href}
+                    style={{
+                      fontSize: 14,
+                      color: "rgba(255,255,255,0.4)",
+                      fontFamily: "var(--font-jost)",
+                      textDecoration: "none",
+                    }}
+                  >
+                    {label}
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            {/* Contato */}
+            <div>
+              <p
                 style={{
                   fontFamily: "var(--font-jost)",
-                  fontSize: 16,
+                  fontSize: 11,
                   fontWeight: 700,
-                  letterSpacing: "0.08em",
-                  color: ORANGE,
+                  letterSpacing: "0.15em",
+                  color: "rgba(255,255,255,0.85)",
+                  textTransform: "uppercase",
+                  marginBottom: 16,
                 }}
               >
-                .ia
-              </span>
-            </Link>
-            <p
-              style={{
-                fontSize: 14,
-                color: "rgba(255,255,255,0.4)",
-                fontFamily: "var(--font-jost)",
-                lineHeight: 1.7,
-                maxWidth: 300,
-                marginBottom: 24,
-              }}
-            >
-              Sistema de agendamento automático para barbearias. Organizado,
-              profissional e sem depender de mensagens manuais.
-            </p>
+                Contato
+              </p>
+              <a
+                href={WA_LINK}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 8,
+                  padding: "10px 20px",
+                  borderRadius: 999,
+                  fontSize: 13,
+                  fontWeight: 600,
+                  fontFamily: "var(--font-jost)",
+                  color: "#fff",
+                  backgroundColor: ORANGE,
+                  textDecoration: "none",
+                }}
+              >
+                <WhatsAppIcon />
+                Contato
+              </a>
 
-            <a
-              href={WA_LINK}
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 8,
-                padding: "10px 20px",
-                borderRadius: 999,
-                fontSize: 13,
-                fontWeight: 600,
-                fontFamily: "var(--font-jost)",
-                color: "#fff",
-                backgroundColor: ORANGE,
-                textDecoration: "none",
-                transition: "background-color 200ms",
-              }}
-              onMouseEnter={(e) =>
-                ((e.currentTarget as HTMLElement).style.backgroundColor = "#ea6c0a")
-              }
-              onMouseLeave={(e) =>
-                ((e.currentTarget as HTMLElement).style.backgroundColor = ORANGE)
-              }
-            >
-              <WhatsAppIcon />
-              Contato
-            </a>
+              <p
+                style={{
+                  marginTop: 12,
+                  fontSize: 13,
+                  color: "rgba(255,255,255,0.35)",
+                  fontFamily: "var(--font-jost)",
+                }}
+              >
+                contato@barberio.com.br
+              </p>
+            </div>
           </div>
+        ) : (
+          // ── DESKTOP: original ──
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "2fr 1fr 1fr",
+              gap: 48,
+            }}
+          >
+            {/* Brand column */}
+            <div>
+              <Link
+                href="/"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 8,
+                  marginBottom: 16,
+                  textDecoration: "none",
+                }}
+              >
+                <Image
+                  src="/assets/LOGO1.png"
+                  alt="Logo"
+                  width={28}
+                  height={28}
+                  style={{ objectFit: "contain" }}
+                />
+                <span
+                  style={{
+                    fontFamily: "var(--font-jost)",
+                    fontSize: 16,
+                    fontWeight: 700,
+                    letterSpacing: "0.08em",
+                    color: "rgba(255,255,255,0.85)",
+                  }}
+                >
+                  automatiza
+                </span>
+                <span
+                  style={{
+                    fontFamily: "var(--font-jost)",
+                    fontSize: 16,
+                    fontWeight: 700,
+                    letterSpacing: "0.08em",
+                    color: ORANGE,
+                  }}
+                >
+                  .ia
+                </span>
+              </Link>
+              <p
+                style={{
+                  fontSize: 14,
+                  color: "rgba(255,255,255,0.4)",
+                  fontFamily: "var(--font-jost)",
+                  lineHeight: 1.7,
+                  maxWidth: 300,
+                  marginBottom: 24,
+                }}
+              >
+                Sistema de agendamento automático para barbearias. Organizado,
+                profissional e sem depender de mensagens manuais.
+              </p>
+              <a
+                href={WA_LINK}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 8,
+                  padding: "10px 20px",
+                  borderRadius: 999,
+                  fontSize: 13,
+                  fontWeight: 600,
+                  fontFamily: "var(--font-jost)",
+                  color: "#fff",
+                  backgroundColor: ORANGE,
+                  textDecoration: "none",
+                  transition: "background-color 200ms",
+                }}
+                onMouseEnter={(e) =>
+                  ((e.currentTarget as HTMLElement).style.backgroundColor =
+                    "#ea6c0a")
+                }
+                onMouseLeave={(e) =>
+                  ((e.currentTarget as HTMLElement).style.backgroundColor =
+                    ORANGE)
+                }
+              >
+                <WhatsAppIcon />
+                Contato
+              </a>
+            </div>
 
-          {/* Nav column */}
-          <div>
-            <p
-              style={{
-                fontFamily: "var(--font-jost)",
-                fontSize: 11,
-                fontWeight: 700,
-                letterSpacing: "0.15em",
-                color: "rgba(255,255,255,0.85)",
-                textTransform: "uppercase",
-                marginBottom: 16,
-              }}
-            >
-              Navegação
-            </p>
-            <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-              {[
-                { label: "Funcionalidades", href: "#funcionalidades" },
-                { label: "Como funciona", href: "#demo" },
-                { label: "Benefícios", href: "#funcionalidades" },
-                { label: "Planos", href: "#planos" },
-                { label: "FAQ", href: "#faq" },
-              ].map(({ label, href }) => (
-                <Link
-                  key={href + label}
-                  href={href}
+            {/* Nav column */}
+            <div>
+              <p
+                style={{
+                  fontFamily: "var(--font-jost)",
+                  fontSize: 11,
+                  fontWeight: 700,
+                  letterSpacing: "0.15em",
+                  color: "rgba(255,255,255,0.85)",
+                  textTransform: "uppercase",
+                  marginBottom: 16,
+                }}
+              >
+                Navegação
+              </p>
+              <div
+                style={{ display: "flex", flexDirection: "column", gap: 12 }}
+              >
+                {[
+                  { label: "Funcionalidades", href: "#funcionalidades" },
+                  { label: "Como funciona", href: "#demo" },
+                  { label: "Benefícios", href: "#funcionalidades" },
+                  { label: "Planos", href: "#planos" },
+                  { label: "FAQ", href: "#faq" },
+                ].map(({ label, href }) => (
+                  <Link
+                    key={href + label}
+                    href={href}
+                    style={{
+                      fontSize: 14,
+                      color: "rgba(255,255,255,0.4)",
+                      fontFamily: "var(--font-jost)",
+                      textDecoration: "none",
+                      transition: "color 150ms",
+                    }}
+                    onMouseEnter={(e) =>
+                      ((e.currentTarget as HTMLElement).style.color =
+                        "rgba(255,255,255,0.85)")
+                    }
+                    onMouseLeave={(e) =>
+                      ((e.currentTarget as HTMLElement).style.color =
+                        "rgba(255,255,255,0.4)")
+                    }
+                  >
+                    {label}
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            {/* Contact column */}
+            <div>
+              <p
+                style={{
+                  fontFamily: "var(--font-jost)",
+                  fontSize: 11,
+                  fontWeight: 700,
+                  letterSpacing: "0.15em",
+                  color: "rgba(255,255,255,0.85)",
+                  textTransform: "uppercase",
+                  marginBottom: 16,
+                }}
+              >
+                Contato
+              </p>
+              <div
+                style={{ display: "flex", flexDirection: "column", gap: 12 }}
+              >
+                <a
+                  href={WA_LINK}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   style={{
                     fontSize: 14,
                     color: "rgba(255,255,255,0.4)",
@@ -151,78 +358,42 @@ export default function Footer() {
                     transition: "color 150ms",
                   }}
                   onMouseEnter={(e) =>
-                    ((e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.85)")
+                    ((e.currentTarget as HTMLElement).style.color = ORANGE)
                   }
                   onMouseLeave={(e) =>
-                    ((e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.4)")
+                    ((e.currentTarget as HTMLElement).style.color =
+                      "rgba(255,255,255,0.4)")
                   }
                 >
-                  {label}
-                </Link>
-              ))}
+                  WhatsApp
+                </a>
+                <a
+                  href="mailto:contato@barberio.com.br"
+                  style={{
+                    fontSize: 14,
+                    color: "rgba(255,255,255,0.4)",
+                    fontFamily: "var(--font-jost)",
+                    textDecoration: "none",
+                    transition: "color 150ms",
+                  }}
+                  onMouseEnter={(e) =>
+                    ((e.currentTarget as HTMLElement).style.color =
+                      "rgba(255,255,255,0.85)")
+                  }
+                  onMouseLeave={(e) =>
+                    ((e.currentTarget as HTMLElement).style.color =
+                      "rgba(255,255,255,0.4)")
+                  }
+                >
+                  contato@barberio.com.br
+                </a>
+              </div>
             </div>
           </div>
-
-          {/* Contact column */}
-          <div>
-            <p
-              style={{
-                fontFamily: "var(--font-jost)",
-                fontSize: 11,
-                fontWeight: 700,
-                letterSpacing: "0.15em",
-                color: "rgba(255,255,255,0.85)",
-                textTransform: "uppercase",
-                marginBottom: 16,
-              }}
-            >
-              Contato
-            </p>
-            <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-              <a
-                href={WA_LINK}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  fontSize: 14,
-                  color: "rgba(255,255,255,0.4)",
-                  fontFamily: "var(--font-jost)",
-                  textDecoration: "none",
-                  transition: "color 150ms",
-                }}
-                onMouseEnter={(e) =>
-                  ((e.currentTarget as HTMLElement).style.color = ORANGE)
-                }
-                onMouseLeave={(e) =>
-                  ((e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.4)")
-                }
-              >
-                WhatsApp
-              </a>
-              <a
-                href="mailto:contato@barberio.com.br"
-                style={{
-                  fontSize: 14,
-                  color: "rgba(255,255,255,0.4)",
-                  fontFamily: "var(--font-jost)",
-                  textDecoration: "none",
-                  transition: "color 150ms",
-                }}
-                onMouseEnter={(e) =>
-                  ((e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.85)")
-                }
-                onMouseLeave={(e) =>
-                  ((e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.4)")
-                }
-              >
-                contato@barberio.com.br
-              </a>
-            </div>
-          </div>
-        </div>
+        )}
       </div>
 
-      {/* Bottom bar */}
+      {/* Bottom bar — igual em ambos */}
       <div
         style={{
           borderTop: "1px solid rgba(255,255,255,0.07)",
@@ -262,10 +433,12 @@ export default function Footer() {
                   transition: "color 150ms",
                 }}
                 onMouseEnter={(e) =>
-                  ((e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.6)")
+                  ((e.currentTarget as HTMLElement).style.color =
+                    "rgba(255,255,255,0.6)")
                 }
                 onMouseLeave={(e) =>
-                  ((e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.25)")
+                  ((e.currentTarget as HTMLElement).style.color =
+                    "rgba(255,255,255,0.25)")
                 }
               >
                 {item}

@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 export default function DemoVideo() {
-  const sectionRef   = useRef<HTMLElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
   const [hasAnimated, setHasAnimated] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -26,7 +26,7 @@ export default function DemoVideo() {
           observer.disconnect();
         }
       },
-      { threshold: 0.15 }
+      { threshold: 0.15 },
     );
 
     observer.observe(el);
@@ -34,7 +34,7 @@ export default function DemoVideo() {
   }, []);
 
   const EASE = "cubic-bezier(0, 0, 0.2, 1)";
-  const DUR  = "1000ms";
+  const DUR = "1000ms";
 
   // ── MOBILE: card grande (mesmo tamanho do desktop), mostra só a ponta à direita.
   // Celular centralizado abaixo do card.
@@ -48,7 +48,7 @@ export default function DemoVideo() {
           position: "relative",
           overflow: "hidden",
           // card: top 20 + maxHeight 420 = bottom 440. Celular a 460. ~560px altura celular + folga
-          minHeight: "1600px",
+          minHeight: "1250px",
         }}
       >
         {/* ── Card: tamanho original, desliza da direita, mostra só a ponta.
@@ -57,7 +57,7 @@ export default function DemoVideo() {
         <div
           style={{
             position: "absolute",
-            top: "20px",
+            // top: "20px",
             right: 0,
             width: "clamp(740px, 104vw, 1280px)",
             opacity: hasAnimated ? 1 : 0,
@@ -83,7 +83,14 @@ export default function DemoVideo() {
             }}
           />
 
-          <div style={{ position: "relative", overflow: "hidden", borderRadius: "9.85% / 15.37%", zIndex: 1 }}>
+          <div
+            style={{
+              position: "relative",
+              overflow: "hidden",
+              borderRadius: "9.85% / 15.37%",
+              zIndex: 1,
+            }}
+          >
             <Image
               src="/assets/Frame 9.svg"
               alt=""
@@ -93,7 +100,14 @@ export default function DemoVideo() {
               priority
             />
 
-            <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center" }}>
+            <div
+              style={{
+                position: "absolute",
+                inset: 0,
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
               <div
                 style={{
                   marginLeft: "8%",
@@ -115,7 +129,9 @@ export default function DemoVideo() {
                     marginBottom: "clamp(6px, 0.8vw, 11px)",
                   }}
                 >
-                  Fluxo direto,<br />sem enrolação.
+                  Fluxo direto,
+                  <br />
+                  sem enrolação.
                 </h2>
 
                 <p
@@ -129,7 +145,9 @@ export default function DemoVideo() {
                     marginBottom: "clamp(28px, 5vw, 58px)",
                   }}
                 >
-                  Uma experiência mais clara<br />para você e para o cliente.
+                  Uma experiência mais clara
+                  <br />
+                  para você e para o cliente.
                 </p>
 
                 <p
@@ -143,7 +161,11 @@ export default function DemoVideo() {
                     marginBottom: "clamp(24px, 4vw, 48px)",
                   }}
                 >
-                  Ofereça um<br />agendamento mais<br />rápido e organizado.
+                  Ofereça um
+                  <br />
+                  agendamento mais
+                  <br />
+                  rápido e organizado.
                 </p>
 
                 <div
@@ -154,6 +176,7 @@ export default function DemoVideo() {
                     flexShrink: 0,
                   }}
                 >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src="/assets/bolinha laranja.svg"
                     alt=""
@@ -161,9 +184,11 @@ export default function DemoVideo() {
                       width: "100%",
                       height: "100%",
                       display: "block",
-                      filter: "drop-shadow(0px 0px 12px rgba(255,255,255,0.35)) drop-shadow(0px 0px 6px rgba(255,255,255,0.2))",
+                      filter:
+                        "drop-shadow(0px 0px 12px rgba(255,255,255,0.35)) drop-shadow(0px 0px 6px rgba(255,255,255,0.2))",
                     }}
                   />
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src="/assets/raio.svg"
                     alt=""
@@ -181,18 +206,19 @@ export default function DemoVideo() {
               </div>
             </div>
           </div>
-
         </div>
 
         {/* ── Celular: abaixo do card (top 20 + altura card ~740px + gap 20 = 780px) ── */}
         <div
           style={{
             position: "absolute",
-            top: "780px",
+            top: "550px",
             left: "50%",
-            width: "min(88vw, 360px)",
+            width: "180vw",
             opacity: hasAnimated ? 1 : 0,
-            transform: hasAnimated ? "translateX(-50%)" : "translate(-50%, 30px)",
+            transform: hasAnimated
+              ? "translateX(-50%)"
+              : "translate(-50%, 30px)",
             pointerEvents: "none",
             transition: hasAnimated
               ? `opacity ${DUR} ${EASE}, transform ${DUR} ${EASE}`
@@ -205,16 +231,25 @@ export default function DemoVideo() {
             loop
             playsInline
             disablePictureInPicture
-            style={{ width: "100%", height: "auto", display: "block", pointerEvents: "none" }}
+            style={{
+              width: "100%",
+              height: "auto",
+              display: "block",
+              pointerEvents: "none",
+            }}
           >
-            <source src="/assets/Comp_1_2_hevc_alpha.mov" type="video/mp4; codecs=hvc1" />
+            <source
+              src="/assets/Comp_1_2_hevc_alpha.mov"
+              type="video/mp4; codecs=hvc1"
+            />
             <source src="/assets/Celular.webm" type="video/webm" />
           </video>
           <div
             style={{
               position: "absolute",
               inset: 0,
-              background: "radial-gradient(ellipse 70% 60% at 50% 50%, transparent 55%, rgba(30,30,30,0.55) 80%, rgba(30,30,30,0.85) 100%)",
+              background:
+                "radial-gradient(ellipse 70% 60% at 50% 50%, transparent 55%, rgba(30,30,30,0.55) 80%, rgba(30,30,30,0.85) 100%)",
               pointerEvents: "none",
             }}
           />
@@ -237,7 +272,6 @@ export default function DemoVideo() {
         paddingBottom: "670px",
       }}
     >
-
       {/* ── Celular: sobe de baixo para cima na primeira entrada ── */}
       <div
         style={{
@@ -263,7 +297,9 @@ export default function DemoVideo() {
             padding: "0 40px",
           }}
         >
-          <div style={{ width: "clamp(820px, 62vw, 680px)", position: "relative" }}>
+          <div
+            style={{ width: "clamp(680px, 62vw, 820px)", position: "relative" }}
+          >
             <video
               src="/assets/Celular.webm"
               autoPlay
@@ -271,13 +307,19 @@ export default function DemoVideo() {
               loop
               playsInline
               disablePictureInPicture
-              style={{ width: "100%", height: "auto", display: "block", pointerEvents: "none" }}
+              style={{
+                width: "100%",
+                height: "auto",
+                display: "block",
+                pointerEvents: "none",
+              }}
             />
             <div
               style={{
                 position: "absolute",
                 inset: 0,
-                background: "radial-gradient(ellipse 70% 60% at 50% 50%, transparent 55%, rgba(30,30,30,0.55) 80%, rgba(30,30,30,0.85) 100%)",
+                background:
+                  "radial-gradient(ellipse 70% 60% at 50% 50%, transparent 55%, rgba(30,30,30,0.55) 80%, rgba(30,30,30,0.85) 100%)",
                 pointerEvents: "none",
               }}
             />
@@ -311,15 +353,19 @@ export default function DemoVideo() {
             borderRadius: "9.85% / 15.37%",
             transform: hasAnimated ? "translateX(-0.7%)" : "translateX(6%)",
             zIndex: 0,
-            transition: hasAnimated
-              ? `transform ${DUR} ${EASE} 550ms`
-              : "none",
+            transition: hasAnimated ? `transform ${DUR} ${EASE} 550ms` : "none",
           }}
         />
 
         {/* Wrapper relativo: vincula card (background) + overlay de conteúdo */}
-        <div style={{ position: "relative", overflow: "hidden", borderRadius: "9.85% / 15.37%", zIndex: 1 }}>
-
+        <div
+          style={{
+            position: "relative",
+            overflow: "hidden",
+            borderRadius: "9.85% / 15.37%",
+            zIndex: 1,
+          }}
+        >
           {/* Background visual — não alterar */}
           <Image
             src="/assets/Frame 9.svg"
@@ -362,7 +408,9 @@ export default function DemoVideo() {
                   marginBottom: "clamp(6px, 0.8vw, 11px)",
                 }}
               >
-                Fluxo direto,<br />sem enrolação.
+                Fluxo direto,
+                <br />
+                sem enrolação.
               </h2>
 
               {/* Subtítulo */}
@@ -377,7 +425,9 @@ export default function DemoVideo() {
                   marginBottom: "clamp(28px, 5vw, 58px)",
                 }}
               >
-                Uma experiência mais clara<br />para você e para o cliente.
+                Uma experiência mais clara
+                <br />
+                para você e para o cliente.
               </p>
 
               {/* Texto de apoio */}
@@ -392,7 +442,11 @@ export default function DemoVideo() {
                   marginBottom: "clamp(24px, 4vw, 48px)",
                 }}
               >
-                Ofereça um<br />agendamento mais<br />rápido e organizado.
+                Ofereça um
+                <br />
+                agendamento mais
+                <br />
+                rápido e organizado.
               </p>
 
               {/* Ícone: bolinha laranja + raio por cima */}
@@ -404,6 +458,7 @@ export default function DemoVideo() {
                   flexShrink: 0,
                 }}
               >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src="/assets/bolinha laranja.svg"
                   alt=""
@@ -411,9 +466,11 @@ export default function DemoVideo() {
                     width: "100%",
                     height: "100%",
                     display: "block",
-                    filter: "drop-shadow(0px 0px 12px rgba(255,255,255,0.35)) drop-shadow(0px 0px 6px rgba(255,255,255,0.2))",
+                    filter:
+                      "drop-shadow(0px 0px 12px rgba(255,255,255,0.35)) drop-shadow(0px 0px 6px rgba(255,255,255,0.2))",
                   }}
                 />
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src="/assets/raio.svg"
                   alt=""
@@ -430,10 +487,8 @@ export default function DemoVideo() {
               </div>
             </div>
           </div>
-
         </div>
       </div>
-
     </section>
   );
 }

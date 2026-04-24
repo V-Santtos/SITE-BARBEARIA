@@ -8,7 +8,7 @@ import { useRef, useEffect } from "react";
 // uma faixa fina na borda com PainBenefits. Com offset menor, o halo já está
 // parcialmente visível quando HaloTransition entra em view.
 const OFFSET_DESKTOP = -820;
-const OFFSET_MOBILE  = -580;
+const OFFSET_MOBILE = -580;
 
 export default function HaloTransition() {
   const imgRef = useRef<HTMLImageElement>(null);
@@ -23,7 +23,7 @@ export default function HaloTransition() {
     const offsetStart = isMobile ? OFFSET_MOBILE : OFFSET_DESKTOP;
 
     if (isMobile) {
-      img.style.width = "260%";
+      img.style.width = "200%";
     }
 
     img.style.transform = `translateX(-50%) translateY(${offsetStart}px)`;
@@ -86,11 +86,13 @@ export default function HaloTransition() {
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
+        id="halo-img"
         ref={imgRef}
         src="/assets/2.png"
         alt=""
         aria-hidden="true"
         draggable={false}
+        // className="w-[200%] md:w-[102%]"
         style={{
           position: "absolute",
           bottom: 0,
@@ -99,6 +101,7 @@ export default function HaloTransition() {
           width: "102%",
           height: "auto",
           mixBlendMode: "lighten",
+          maxWidth: "none",
           pointerEvents: "none",
           userSelect: "none",
           display: "block",

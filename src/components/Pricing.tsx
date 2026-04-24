@@ -96,9 +96,10 @@ function PricingSwitch({
                 fontWeight: 700,
                 padding: "2px 7px",
                 borderRadius: 99,
-                background: isYearly === value
-                  ? "rgba(255,255,255,0.22)"
-                  : "rgba(249,115,22,0.18)",
+                background:
+                  isYearly === value
+                    ? "rgba(255,255,255,0.22)"
+                    : "rgba(249,115,22,0.18)",
                 color: isYearly === value ? "#fff" : ORANGE,
                 letterSpacing: "0.04em",
               }}
@@ -127,7 +128,7 @@ export default function Pricing() {
           observer.disconnect();
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.1 },
     );
     observer.observe(el);
     return () => observer.disconnect();
@@ -177,7 +178,12 @@ export default function Pricing() {
                 staggerDuration={0.12}
                 staggerFrom="first"
                 containerClassName="justify-center"
-                transition={{ type: "spring", stiffness: 220, damping: 32, delay: 0 }}
+                transition={{
+                  type: "spring",
+                  stiffness: 220,
+                  damping: 32,
+                  delay: 0,
+                }}
               >
                 Simples e direto.
               </VerticalCutReveal>
@@ -257,7 +263,8 @@ export default function Pricing() {
                   marginBottom: 20,
                 }}
               >
-                Ideal para barbeiros autônomos que querem organizar a agenda e parecer mais profissional.
+                Ideal para barbeiros autônomos que querem organizar a agenda e
+                parecer mais profissional.
               </p>
               <div style={{ display: "flex", alignItems: "flex-end", gap: 6 }}>
                 <span
@@ -321,18 +328,70 @@ export default function Pricing() {
               Começar agora
             </a>
 
-            <div style={{ borderTop: "1px solid rgba(255,255,255,0.07)", paddingTop: 24, flex: 1 }}>
-              <p style={{ fontFamily: "var(--font-jost)", fontSize: 11, fontWeight: 700, letterSpacing: "0.16em", textTransform: "uppercase", color: "var(--muted-foreground)", marginBottom: 6 }}>
+            <div
+              style={{
+                borderTop: "1px solid rgba(255,255,255,0.07)",
+                paddingTop: 24,
+                flex: 1,
+              }}
+            >
+              <p
+                style={{
+                  fontFamily: "var(--font-jost)",
+                  fontSize: 11,
+                  fontWeight: 700,
+                  letterSpacing: "0.16em",
+                  textTransform: "uppercase",
+                  color: "var(--muted-foreground)",
+                  marginBottom: 6,
+                }}
+              >
                 Incluído
               </p>
-              <p style={{ fontFamily: "var(--font-jost)", fontSize: 13, color: "var(--muted-foreground)", marginBottom: 16 }}>
+              <p
+                style={{
+                  fontFamily: "var(--font-jost)",
+                  fontSize: 13,
+                  color: "var(--muted-foreground)",
+                  marginBottom: 16,
+                }}
+              >
                 O que você recebe no plano:
               </p>
-              <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+              <div
+                style={{ display: "flex", flexDirection: "column", gap: 10 }}
+              >
                 {basicFeatures.map((f, i) => (
-                  <div key={i} style={{ display: "flex", alignItems: "center", gap: 12 }}>
-                    <span style={{ width: 20, height: 20, borderRadius: "50%", backgroundColor: "rgba(249,115,22,0.15)", border: "1px solid rgba(249,115,22,0.3)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, fontSize: 10, color: ORANGE }}>✓</span>
-                    <span style={{ fontFamily: "var(--font-jost)", fontSize: 13, color: "var(--muted-foreground)" }}>{f}</span>
+                  <div
+                    key={i}
+                    style={{ display: "flex", alignItems: "center", gap: 12 }}
+                  >
+                    <span
+                      style={{
+                        width: 20,
+                        height: 20,
+                        borderRadius: "50%",
+                        backgroundColor: "rgba(249,115,22,0.15)",
+                        border: "1px solid rgba(249,115,22,0.3)",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        flexShrink: 0,
+                        fontSize: 10,
+                        color: ORANGE,
+                      }}
+                    >
+                      ✓
+                    </span>
+                    <span
+                      style={{
+                        fontFamily: "var(--font-jost)",
+                        fontSize: 13,
+                        color: "var(--muted-foreground)",
+                      }}
+                    >
+                      {f}
+                    </span>
                   </div>
                 ))}
               </div>
@@ -348,7 +407,8 @@ export default function Pricing() {
               borderRadius: 20,
               backgroundColor: "#F5F2EE",
               border: "1px solid rgba(0,0,0,0.05)",
-              boxShadow: "0 8px 40px rgba(0,0,0,0.22), 0 1px 0 rgba(255,255,255,0.06) inset",
+              boxShadow:
+                "0 8px 40px rgba(0,0,0,0.22), 0 1px 0 rgba(255,255,255,0.06) inset",
               position: "relative",
               overflow: "hidden",
               opacity: visible ? 1 : 0,
@@ -360,8 +420,8 @@ export default function Pricing() {
             <div
               style={{
                 position: "absolute",
-                top: 20,
-                right: 20,
+                top: 10,
+                right: 10,
                 padding: "5px 12px",
                 borderRadius: 99,
                 backgroundColor: "rgba(249,115,22,0.12)",
@@ -398,7 +458,8 @@ export default function Pricing() {
                   marginBottom: 20,
                 }}
               >
-                Para barbearias com múltiplos profissionais que precisam de controle completo e escala.
+                Para barbearias com múltiplos profissionais que precisam de
+                controle completo e escala.
               </p>
               <span
                 style={{
@@ -462,27 +523,77 @@ export default function Pricing() {
               Falar com a equipe
             </a>
 
-            <div style={{ borderTop: "1px solid rgba(0,0,0,0.08)", paddingTop: 24, flex: 1 }}>
-              <p style={{ fontFamily: "var(--font-jost)", fontSize: 11, fontWeight: 700, letterSpacing: "0.16em", textTransform: "uppercase", color: "#8a8480", marginBottom: 6 }}>
+            <div
+              style={{
+                borderTop: "1px solid rgba(0,0,0,0.08)",
+                paddingTop: 24,
+                flex: 1,
+              }}
+            >
+              <p
+                style={{
+                  fontFamily: "var(--font-jost)",
+                  fontSize: 11,
+                  fontWeight: 700,
+                  letterSpacing: "0.16em",
+                  textTransform: "uppercase",
+                  color: "#8a8480",
+                  marginBottom: 6,
+                }}
+              >
                 Incluído
               </p>
-              <p style={{ fontFamily: "var(--font-jost)", fontSize: 13, color: "#7a7672", marginBottom: 16 }}>
+              <p
+                style={{
+                  fontFamily: "var(--font-jost)",
+                  fontSize: 13,
+                  color: "#7a7672",
+                  marginBottom: 16,
+                }}
+              >
                 Tudo do Essencial, mais:
               </p>
-              <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+              <div
+                style={{ display: "flex", flexDirection: "column", gap: 10 }}
+              >
                 {proFeatures.map((f, i) => (
-                  <div key={i} style={{ display: "flex", alignItems: "center", gap: 12 }}>
-                    <span style={{ width: 20, height: 20, borderRadius: "50%", backgroundColor: "rgba(249,115,22,0.12)", border: "1px solid rgba(249,115,22,0.28)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, fontSize: 10, color: ORANGE }}>✓</span>
-                    <span style={{ fontFamily: "var(--font-jost)", fontSize: 13, color: "#2e2b28" }}>{f}</span>
+                  <div
+                    key={i}
+                    style={{ display: "flex", alignItems: "center", gap: 12 }}
+                  >
+                    <span
+                      style={{
+                        width: 20,
+                        height: 20,
+                        borderRadius: "50%",
+                        backgroundColor: "rgba(249,115,22,0.12)",
+                        border: "1px solid rgba(249,115,22,0.28)",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        flexShrink: 0,
+                        fontSize: 10,
+                        color: ORANGE,
+                      }}
+                    >
+                      ✓
+                    </span>
+                    <span
+                      style={{
+                        fontFamily: "var(--font-jost)",
+                        fontSize: 13,
+                        color: "#2e2b28",
+                      }}
+                    >
+                      {f}
+                    </span>
                   </div>
                 ))}
               </div>
             </div>
           </div>
         </div>
-
       </div>
     </section>
   );
 }
-
